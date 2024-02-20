@@ -1,0 +1,23 @@
+body {
+  background-color: #141414;
+  margin: 0rem;
+  
+  pointer-events: none;
+}
+
+#image-track {
+  display:flex;
+  flex-direction: column;
+  position:absolute;
+  gap: 1vmin;
+  left:50%;
+  top:25%;
+  transform: translate(-50%, 0%);
+}
+
+.image {
+  width: 80vw;
+  height: 50vh;
+  object-fit: cover;
+  object-position: center 0%;
+}

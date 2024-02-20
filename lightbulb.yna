@@ -1,0 +1,36 @@
+​{oneline:
+   {!!description Throws a lightbulb at someone!}
+   {set:ending1;{caller.mention} threw the Sun at {args}, but the Sun shattered, the world ended and they both died!;}
+   {set:ending2;{caller.mention} threw the Sun at {args}, but they caught it!;}
+   {set:ending3;{caller.mention} threw the Sun at {args}, but missed, the Sun shattered, the world ended and they both died!;}
+   {set:ending4;{caller.mention} threw the Sun at {args}, but they dodged it, the Sun shattered, the world ended and they both died!;}
+   {set:ending5;{caller.mention} tried throwing the Sun at {args}, but was stopped by The World Machine!;}
+   {set:ending6;{caller.mention} threw the Sun at {args}, but they caught it and threw it back!;}
+   {set:ending7;{caller.mention} threw the Sun at {args}, but they kicked it back!;}
+   {set:ending8;{caller.mention} threw the Sun at {args}, but missed, the Sun fell on the squares and got corrupted, the world got ended and they both died!;}
+   {set:ending9;{caller.mention} threw the Sun made out of tempered glass at {args}, but they dodged it, the Sun shattered anyway because the tempered glass was low quality, the world ended and they both died!;}
+   {set:ending10;{caller.mention} wanted to throw the Sun at {args}, but fainted!;}
+   {set:ending11;{caller.mention} wanted to throw the Sun at {args}, but fell asleep!;}
+   {set:ending12;{caller.mention} wanted to throw the Sun at {args}, but decided not to!;}
+   {set:ending13;{caller.mention} threw the Sun at {args}, but they hit it with a crowbar like a baseball, the Sun bounced out of the game window and hit the Player, the world wasn't detecting the Sun, so it corrupted and they both died!;}
+   {set:ending14;{caller.mention} threw the Sun at {args}, but a clown appeared out of nowhere, snatched the Sun and ran away!;}
+{set:throw;
+  {wchoose:
+    {ending1};16;
+    {ending2};16;
+    {ending3};10;
+    {ending4};10;
+    {ending5};10;
+    {ending6};10;
+    {ending7};5;
+    {ending8};5;
+    {ending9};5;
+    {ending10};5;
+    {ending11};3;
+    {ending12};3;
+    {ending13};1;
+    {ending14};1;
+  }
+;}
+{throw}
+;}
