@@ -11,8 +11,8 @@ print(numbers, '\n')
 # simple sorting algorithmm, idk the name
 
 for _ in range(len(numbers)-1):
-    for _ in range(len(numbers)-1):
-        if numbers[_] > numbers[_+1]:
-            numbers[_], numbers[_+1] = numbers[_+1], numbers[_]
+    for i in range(len(numbers)-1):
+        if numbers[i] > numbers[i+1]:
+            numbers[i], numbers[i+1] = numbers[i+1], numbers[i]
 print(numbers)
     
