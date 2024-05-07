@@ -1,5 +1,6 @@
 def caesar(direction, message, shift='1'):
-    if direction != 'encrypt' and direction != 'decrypt': raise Exception('Invalid syntax! Expected "encrypt" or "decrypt" for direction.')
+    if direction != 'encrypt' and direction != 'decrypt':
+        raise Exception('Invalid syntax! Expected "encrypt" or "decrypt" for direction.')
     if not shift.isnumeric(): raise Exception('Invalid syntax! Expected an integer.')
 
     shift = int(shift)
