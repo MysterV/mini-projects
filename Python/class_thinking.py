@@ -3,6 +3,7 @@ class name:
         print("I'm thinking...")
     the_name = "Python 3"
 
+
 class brain(name):
     def think(self):
         super().thinking()
