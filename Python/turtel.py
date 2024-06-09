@@ -74,16 +74,26 @@ def pencolor_random():
 
 def sand_bug(steps, length):
     turtel.down()
+    turtel.pensize(5)
     for i in range(steps):
-        turtel.pensize(5)
         pencolor_random()
         turtel.right(90 * r.randint(0, 3))
         turtel.forward(length)
     turtel.up()
 
+def slinky(n):
+    turtel.down()
+    pencolor_random()
+    turtel.pensize(3)
+    for i in range(n):
+        turtel.circle(r.randint(50, 150), 4)
+        turtel.left(360/n)
+    turtel.up()
+
 
 # placeholder()
 # polygons(10, 25)
-sand_bug(1000, 10)
+# sand_bug(1000, 10)
+slinky(5000)
 
 turtel_box.exitonclick()
