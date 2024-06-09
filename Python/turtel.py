@@ -91,9 +91,22 @@ def slinky(n):
     turtel.up()
 
 
+def dot_grid(grid_size, dot_distance, dot_size):
+    grid_length = (grid_size-1) * dot_distance
+    for row in range(grid_size):
+        turtel.home()
+        turtel.setx(turtel.xcor() - grid_length/2)
+        turtel.sety(turtel.ycor() - grid_length/2 + row*dot_distance)
+        for dot in range(grid_size):
+            pencolor_random()
+            turtel.dot(dot_size)
+            turtel.forward(dot_distance)
+
+
 # placeholder()
 # polygons(10, 25)
 # sand_bug(1000, 10)
-slinky(5000)
+# slinky(5000)
+dot_grid(9, 100, 40)
 
 turtel_box.exitonclick()
