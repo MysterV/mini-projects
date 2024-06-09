@@ -54,6 +54,20 @@ def placeholder():
     turtel.home()
 
 
-placeholder()
+def polygons(n, side_length):
+    # move the center point using circle math
+    radius = n * side_length / 6.28
+    turtel.sety(radius)
+    turtel.down()
+    for sides in range(3, n+1):
+        for i in range(sides):
+            turtel.forward(side_length)
+            turtel.right(360/sides)
+    turtel.up()
+    turtel.home()
+
+
+# placeholder()
+polygons(10, 25)
 
 turtel_box.exitonclick()
