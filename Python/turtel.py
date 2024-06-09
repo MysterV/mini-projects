@@ -1,14 +1,14 @@
 import turtle
 turtel = turtle.Turtle()
-# turtel.shape('turtle')
-# turtel.color('aquamarine')
 turtel.hideturtle()
+turtel.up()
 turtel_box = turtle.Screen()
-turtel_box.delay(0)
+turtel_box.tracer(1000, 0) # update window every 1000 steps to speed up drawing
+turtel_box.colormode(255) # use RGB
 
-size = 54
+# circle drawing parameters
+scale = 54
 angle = 180 + 1
-
 
 def circle(length):
     turtel.pensize(length / 40)
@@ -30,28 +30,30 @@ def draw_4_circles(radius, distance, shift=0):
         turtel.forward(distance)
         circle(radius)
 
-# when generating things, the turtle gets slow very quickly, and can take a long time to finish
-# but if you minimize the window, the turtle speeds up like 30x and finishes the whole thing in under 20 seconds
 
-# center one
-circle(size*50)
-# perpendicular
-draw_4_circles(size/2, size/2)
-draw_4_circles(size, size)
-draw_4_circles(size*1.5, size*2)
-draw_4_circles(size*2, size*2.5)
-draw_4_circles(size*3, size*3.5)
-draw_4_circles(size*4, size*4.5)
-draw_4_circles(size*5, size*6)
-draw_4_circles(size*6.5, size*8)
-# diagonal
-draw_4_circles(size/2, size * 1.0625, 45)
-draw_4_circles(size, size * 1.25, 45)
-draw_4_circles(size * 1.5, size * 1.25 * 1.41, 45)
-draw_4_circles(size*2, size * 2.25 * 1.41, 45)
-draw_4_circles(size*3, size * 3.25 * 1.41, 45)
-draw_4_circles(size*4, size * 5.25 * 1.41, 45)
-draw_4_circles(size*5, size * 7 * 1.41, 45)
+def placeholder():
+    # center one
+    circle(scale * 50)
+    # perpendicular
+    draw_4_circles(scale / 2, scale / 2)
+    draw_4_circles(scale, scale)
+    draw_4_circles(scale * 1.5, scale * 2)
+    draw_4_circles(scale * 2, scale * 2.5)
+    draw_4_circles(scale * 3, scale * 3.5)
+    draw_4_circles(scale * 4, scale * 4.5)
+    draw_4_circles(scale * 5, scale * 6)
+    draw_4_circles(scale * 6.5, scale * 8)
+    # diagonal
+    draw_4_circles(scale / 2, scale * 1.0625, 45)
+    draw_4_circles(scale, scale * 1.25, 45)
+    draw_4_circles(scale * 1.5, scale * 1.25 * 1.41, 45)
+    draw_4_circles(scale * 2, scale * 2.25 * 1.41, 45)
+    draw_4_circles(scale * 3, scale * 3.25 * 1.41, 45)
+    draw_4_circles(scale * 4, scale * 5.25 * 1.41, 45)
+    draw_4_circles(scale * 5, scale * 7 * 1.41, 45)
+    turtel.home()
 
-turtel.home()
+
+placeholder()
+
 turtel_box.exitonclick()
