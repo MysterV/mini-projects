@@ -1,4 +1,5 @@
 import turtle
+import random as r
 turtel = turtle.Turtle()
 turtel.hideturtle()
 turtel.up()
@@ -67,7 +68,22 @@ def polygons(n, side_length):
     turtel.home()
 
 
+def pencolor_random():
+    turtel.pencolor(r.randint(0, 255), r.randint(0, 255), r.randint(0, 255))
+
+
+def sand_bug(steps, length):
+    turtel.down()
+    for i in range(steps):
+        turtel.pensize(5)
+        pencolor_random()
+        turtel.right(90 * r.randint(0, 3))
+        turtel.forward(length)
+    turtel.up()
+
+
 # placeholder()
-polygons(10, 25)
+# polygons(10, 25)
+sand_bug(1000, 10)
 
 turtel_box.exitonclick()
