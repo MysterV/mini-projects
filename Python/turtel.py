@@ -97,8 +97,8 @@ def dot_grid(grid_size, dot_distance, dot_size):
     grid_length = (grid_size-1) * dot_distance
     for row in range(grid_size):
         turtel.home()
-        turtel.setx(turtel.xcor() - grid_length/2)
-        turtel.sety(turtel.ycor() - grid_length/2 + row*dot_distance)
+        turtel.setx(-grid_length/2)
+        turtel.sety(-grid_length/2 + row*dot_distance)
         for dot in range(grid_size):
             pencolor_random()
             turtel.dot(dot_size)
@@ -132,11 +132,37 @@ def paint():
         turtel_box.onkeypress(clear, 'c')
 
 
+def race(turtle_count, window_length, window_height):
+    turtles = []
+    turtel_box.tracer(max(1, turtle_count**1.5/10), 0)
+    turtel_box.setup(window_length + 50, window_height)
+
+    for i in range(turtle_count):
+        turtles.append(turtle.Turtle())
+    for ttl_index in range(len(turtles)):
+        ttl = turtles[ttl_index]
+        ttl.up()
+        ttl.shape('turtle')
+        ttl.shapesize(2)
+        ttl.fillcolor(r.randint(0, 255), r.randint(0, 255), r.randint(0, 255))
+        ttl.goto(-window_length/2, -window_height/2 + (ttl_index+0.5) * window_height / turtle_count)
+
+    while True:
+        for ttl in turtles:
+            ttl.forward(r.randint(0, 10))
+            if ttl.xcor() >= window_length/2 - 10:
+                print(f'Turtle number {turtles.index(ttl)+1} won!')
+                return
+
+
+
+
 # placeholder()
 # polygons(10, 25)
 # sand_bug(1000, 10)
 # slinky(5000)
 # dot_grid(9, 100, 40)
-paint()
+# paint()
+race(100, 1800, 1000)
 
 turtel_box.exitonclick()
