@@ -4,12 +4,13 @@ turtel = turtle.Turtle()
 turtel.hideturtle()
 turtel.up()
 turtel_box = turtle.Screen()
-turtel_box.tracer(1000, 0) # update window every 1000 steps to speed up drawing
-turtel_box.colormode(255) # use RGB
+turtel_box.tracer(1000, 0)  # update window every 1000 steps to speed up drawing
+turtel_box.colormode(255)  # use RGB
 
 # circle drawing parameters
 scale = 54
 angle = 180 + 1
+
 
 def circle(length):
     turtel.pensize(length / 40)
@@ -81,6 +82,7 @@ def sand_bug(steps, length):
         turtel.forward(length)
     turtel.up()
 
+
 def slinky(n):
     turtel.down()
     pencolor_random()
@@ -102,11 +104,39 @@ def dot_grid(grid_size, dot_distance, dot_size):
             turtel.dot(dot_size)
             turtel.forward(dot_distance)
 
+def paint():
+    while True:
+        turtel_box.tracer(1000, 0)
+        turtel.down()
+        turtel.showturtle()
+        turtel.shape('turtle')
+        turtel.pensize(5)
+        def mv_w(): turtel.forward(10)
+        def mv_s(): turtel.back(10)
+        def mv_a():
+            turtel.left(10)
+            pencolor_random()
+        def mv_d():
+            turtel.right(10)
+            pencolor_random()
+        def clear():
+            turtel.home()
+            turtel.clear()
+
+        turtel_box.listen()
+
+        turtel_box.onkeypress(mv_w, 'w')
+        turtel_box.onkeypress(mv_s, 's')
+        turtel_box.onkeypress(mv_a, 'a')
+        turtel_box.onkeypress(mv_d, 'd')
+        turtel_box.onkeypress(clear, 'c')
+
 
 # placeholder()
 # polygons(10, 25)
 # sand_bug(1000, 10)
 # slinky(5000)
-dot_grid(9, 100, 40)
+# dot_grid(9, 100, 40)
+paint()
 
 turtel_box.exitonclick()
