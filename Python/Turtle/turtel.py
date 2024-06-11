@@ -105,31 +105,37 @@ def dot_grid(grid_size, dot_distance, dot_size):
             turtel.forward(dot_distance)
 
 def paint():
-    while True:
-        turtel_box.tracer(1000, 0)
-        turtel.down()
-        turtel.showturtle()
-        turtel.shape('turtle')
-        turtel.pensize(5)
-        def mv_w(): turtel.forward(10)
-        def mv_s(): turtel.back(10)
-        def mv_a():
-            turtel.left(10)
-            pencolor_random()
-        def mv_d():
-            turtel.right(10)
-            pencolor_random()
-        def clear():
-            turtel.home()
-            turtel.clear()
+    turtel_box.tracer(1, 0)
+    turtel.down()
+    turtel.showturtle()
+    turtel.shape('turtle')
+    turtel.pensize(5)
 
-        turtel_box.listen()
+    def mv_w():
+        turtel.forward(10)
 
-        turtel_box.onkeypress(mv_w, 'w')
-        turtel_box.onkeypress(mv_s, 's')
-        turtel_box.onkeypress(mv_a, 'a')
-        turtel_box.onkeypress(mv_d, 'd')
-        turtel_box.onkeypress(clear, 'c')
+    def mv_s():
+        turtel.back(10)
+
+    def mv_a():
+        turtel.left(10)
+        pencolor_random()
+
+    def mv_d():
+        turtel.right(10)
+        pencolor_random()
+
+    def clear():
+        turtel.home()
+        turtel.clear()
+
+    turtel_box.listen()
+    turtel_box.onkeypress(mv_w, 'w')
+    turtel_box.onkeypress(mv_s, 's')
+    turtel_box.onkeypress(mv_a, 'a')
+    turtel_box.onkeypress(mv_d, 'd')
+    turtel_box.onkeypress(clear, 'c')
+
 
 
 def race(turtle_count, window_length, window_height):
@@ -162,7 +168,7 @@ def race(turtle_count, window_length, window_height):
 # sand_bug(1000, 10)
 # slinky(5000)
 # dot_grid(9, 100, 40)
-# paint()
-race(100, 1800, 1000)
+paint()
+# race(10, 1800, 1000)
 
 turtel_box.exitonclick()
