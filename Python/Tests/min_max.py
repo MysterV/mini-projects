@@ -5,8 +5,6 @@ for _ in range(10):
 
 print(numbers)
 
-
-
 # max
 a = 0
 for _ in numbers:
@@ -14,7 +12,7 @@ for _ in numbers:
         a = _
 print(f'The lowest value: {a}')
 
-#min
+# min
 b = numbers[0]
 for _ in numbers:
     if _ < b:

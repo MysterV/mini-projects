@@ -6,21 +6,21 @@ true = love = 0
 
 string = a + b
 
-for _ in string:
-    if _ == 't':
+for i in string:
+    if i == 't':
         true += 1
-    elif _ == 'r':
+    elif i == 'r':
         true += 1
-    elif _ == 'u':
+    elif i == 'u':
         true += 1
-    elif _ == 'e':
+    elif i == 'e':
         true += 1
         love += 1
-    elif _ == 'l':
+    elif i == 'l':
         love += 1
-    elif _ == 'o':
+    elif i == 'o':
         love += 1
-    elif _ == 'v':
+    elif i == 'v':
         love += 1
         
 

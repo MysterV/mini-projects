@@ -1,5 +1,6 @@
 # Your choices will have consequences
-# 10 levels, 3 choices each
+# 3 levels, 3 choices each, 9 endings
+# WIP
 
 print('''Greetings! You\'re a cat. You're sitting at home, as you're walking around the house, you see that your owner is not home. You see an open window in the living room.
 What do you do?

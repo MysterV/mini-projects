@@ -2,7 +2,8 @@
 
 from urllib.parse import quote
 
-def URL_encode(path):
+
+def url_encode(path):
     path = list(path)
     if path[0] == '"': path.pop(0)
     if path[-1] == '"': path.pop(-1)
@@ -16,4 +17,5 @@ def URL_encode(path):
     path = 'file://' + ''.join(path)
     return path
 
-print(URL_encode(input('What path to encode?\n')))
+
+print(url_encode(input('What path to encode?\n')))

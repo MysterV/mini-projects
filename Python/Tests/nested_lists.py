@@ -9,6 +9,7 @@ row8 = ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖']
 
 board = [row1, row2, row3, row4, row5, row6, row7, row8]
 
+
 def insert():
     coords = input('\ngive me chessboard coordinates (e.g. B6): ').casefold()
 
@@ -19,7 +20,6 @@ def insert():
     print(f'\n{row1}\n{row2}\n{row3}\n{row4}\n{row5}\n{row6}\n{row7}\n{row8}\n')
     
     if input('another? y/n: ') == 'y': insert()
-
 
 
 insert()
