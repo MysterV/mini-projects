@@ -7,7 +7,7 @@ game_scale = 21  # needs to be an even number if easy_mode is enabled, I'll conv
 snake_starting_length = 3
 initial_game_speed = 0.5
 background_color = '#228833'
-easy_mode = -1  # set to 1 or 0 to toggle it, anything else to get an input popup
+easy_mode = 0  # set 1 or 0 to toggle it, or use the [E] key in-game
 
 
 if game_scale % 2 != 0:
@@ -15,12 +15,19 @@ if game_scale % 2 != 0:
 
 
 def play():
-    global easy_mode
-
     def restart():
         if not snek.alive:
             game.clear()
             play()
+        return
+
+    def toggle_easy():
+        global easy_mode
+        if easy_mode == 0: easy_mode = 1
+        elif easy_mode == 1: easy_mode = 0
+        score.update_score(snek.len())
+        score.output(-int(game_size/2.05), f'easy mode: {easy_mode}', int(game_size/15), 'bold', '#ddeebb', True)
+        snek.is_easy_mode = easy_mode
         return
 
     # initialize game window
@@ -30,8 +37,6 @@ def play():
     game.setup(game_size, game_size)
     game.bgcolor(background_color)
     game.tracer(1, 0)
-    while easy_mode not in (1, 0):
-        easy_mode = int(game.numinput("Question", 'Go easy (turn off collisions)? 1/0'))
     game.listen()
 
     # initialize game elements
@@ -49,6 +54,7 @@ def play():
     game.onkeypress(snek.head_left, 'Left')
     game.onkeypress(snek.head_right, 'Right')
     game.onkeypress(restart, 'Escape')
+    game.onkeypress(toggle_easy, 'e')
 
     # bring it all together
     won = False
