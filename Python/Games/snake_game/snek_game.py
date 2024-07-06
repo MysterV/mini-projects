@@ -3,8 +3,8 @@ import turtle
 import snek_creature, snek_score, snek_food
 
 # config
-game_scale = 21  # needs to be an even number if easy_mode is enabled, I'll convert it for you even if you forget
-snake_starting_length = 3
+game_scale = 21  # needs to be an even number if easy_mode is enabled, I'll convert it for you if you forget
+snake_starting_length = 3  # aka starting score
 initial_game_speed = 0.5
 background_color = '#228833'
 easy_mode = 0  # set 1 or 0 to toggle it, or use the [E] key in-game
@@ -62,7 +62,7 @@ def play():
         if snek.len() == game_scale**2:
             snek.alive = False
             won = True
-        game_speed = max(0.08, initial_game_speed - 0.02 * snek.len())
+        game_speed = max(0.05, initial_game_speed - 0.02 * snek.len())
         snek.move()
         time.sleep(game_speed)
         if snek.coords(snek.head) == food.coords():
@@ -80,18 +80,3 @@ def play():
 
 
 play()
-
-# TODO
-# - [x] snake movement
-# - [x] snake body
-#     - [x] track snake size
-# - [x] snake food
-# - [x] collisions
-#     - [x] food - grow and move food
-#     - [x] wall - world border
-#     - [x] self - don't do a 180° turn (or 2x 90° turns) in one step
-# - [x] score
-#     - [x] game over screen
-# - [x] scales with window
-#     - [x] score
-#     - [x] game border
