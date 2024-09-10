@@ -1,6 +1,6 @@
 import time
 import turtle
-import snek_creature, snek_score, snek_food
+import snake_creature, snake_score, snake_food
 
 # config
 game_scale = 21  # needs to be an even number if easy_mode is enabled, I'll convert it for you if you forget
