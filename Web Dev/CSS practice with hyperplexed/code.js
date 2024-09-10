@@ -20,7 +20,7 @@ window.onmousemove = e => {
     nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
 
   track.dataset.percentage = nextPercentage;
-/*
+
   track.animate({
     transform: `translate(${nextPercentage}%, -50%)`
   }, {duration:2400, fill:"forwards"}); 
@@ -29,7 +29,7 @@ window.onmousemove = e => {
     image.animate({
       objectPosition: `${100 + nextPercentage}% center`
     }, { duration: 1200, fill: "forwards" });
-  }*/
+  }
 }
 
 
@@ -65,8 +65,8 @@ const handleOnMove = e => {
   }
 }
 
-/* -- Had to add extra lines for touch events -- */
-/*
+// ==========
+
 window.onmousedown = e => handleOnDown(e);
 
 window.ontouchstart = e => handleOnDown(e.touches[0]);
