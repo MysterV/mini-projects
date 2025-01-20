@@ -18,4 +18,7 @@ def url_encode(path):
     return path
 
 
-print(url_encode(input('What path to encode?\n')))
+while True:
+	print(url_encode(input('What path to encode?\n')))
+	if input('continue? y/n: ') not in ('yes', 'y', 'continue', ''):
+	    break

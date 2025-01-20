@@ -1,0 +1,10 @@
+{
+    "tes": {
+        "username": "ttes",
+        "password": "test"
+    },
+    "google.com": {
+        "username": "example.com",
+        "password": ".com"
+    }
+}
