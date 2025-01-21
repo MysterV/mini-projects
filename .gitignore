@@ -3,3 +3,4 @@ input.txt
 __pycache__/
 unknown_words.csv
 *api_key.*
+token.txt
