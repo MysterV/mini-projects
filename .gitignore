@@ -1,8 +1,9 @@
-input.txt
-output.txt
 .idea/
 __pycache__/
 Backups/
+input.txt
+output.txt
+save.txt
 unknown_words.csv
 *api_key.*
 token.txt
