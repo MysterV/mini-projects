@@ -39,7 +39,7 @@ with open(file_path, 'w') as file:
         else: message = message.replace('HOURSh ', '')
         
         if today.minute > 0: message = message.replace('MINUTES', str(today.minute))
-        else: message.replace('MINUTESm ', '')
+        else: message = message.replace('MINUTESm ', '')
         
         messages.append(message)
     file.write('\n'.join(messages))
