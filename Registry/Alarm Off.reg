@@ -1,0 +1,5 @@
+Windows Registry Editor Version 5.00
+
+; turning off notifications dismisses all alarms
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Microsoft.WindowsAlarms_8wekyb3d8bbwe!App]
+"Enabled"="0"
