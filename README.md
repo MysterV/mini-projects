@@ -2,12 +2,13 @@
 Working on it since 2023-12-23
 
 
-## What you can find here:
-Various scripts for various purposes: some small, some Big.
+## Quick summary
+Various scripts and code snippets for various purposes: some small, some Big.
+About 90% of it was hand-made by me, the other 10% tweaked by me.
 
-## Here's explanation for the folders:
+## What you can find here
 - AutoHotKey - various AHK scripts I found on the web and tweaked to suit my needs
-- Python - various mini projects, tools, games, etc.
-- Registry - for various Windows Registry scripts that I made
+- Python - various mini projects, tools, minigames, etc.
+- Registry - various Windows Registry scripts
 - Web Dev - my failed attempts at making websites
 - YNA - YNA tags for a [Discord bot named "42"](https://42.rockett.space/)
