@@ -7,7 +7,7 @@ def timer(function):
         function()
         end = time.time()
         time_diff = end - start
-        print(f'{function.__name__}\tfinished in: {time_diff} seconds')
+        print(f'{function.__name__}\ncompleted:\t{time_diff} seconds')
     return wrapper
 
 
