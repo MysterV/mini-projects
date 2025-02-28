@@ -1,0 +1,32 @@
+/*
+Square border tags by Myster
+God knows where I got this snippet from
+
+Disclaimer: incompatible with Prism theme
+*/
+
+
+
+/* tab bar active tab border */
+.theme-dark .mod-root .workspace-tabs:not(.mod-stacked) .workspace-tab-header.is-active.mod-active {
+    border-top: 2px solid var(--color-accent-1);
+}
+
+/* tab bar active tab title */
+.theme-dark .mod-root .workspace-tabs:not(.mod-stacked) .workspace-tab-header.is-active.mod-active .workspace-tab-header-inner-close-button,
+.theme-dark .mod-root .workspace-tabs:not(.mod-stacked) .workspace-tab-header.is-active.mod-active .workspace-tab-header-inner-icon svg,
+.theme-dark .workspace-tabs:not(.mod-stacked) .workspace-tab-header.is-active.mod-active .workspace-tab-header-inner-title {
+    color: var(--color-accent-2);
+}
+
+/* stacked tabs active tab border */
+.theme-dark .mod-root .workspace-tabs.mod-stacked .workspace-tab-header.is-active.mod-active {
+    border-left: 2px solid var(--color-accent-1);
+}
+
+/* stacked tabs active tab title */
+.theme-dark .mod-root .workspace-tabs.mod-stacked .workspace-tab-header.is-active.mod-active .workspace-tab-header-inner-close-button,
+.theme-dark .mod-root .workspace-tabs.mod-stacked .workspace-tab-header.is-active.mod-active .workspace-tab-header-inner-icon svg,
+.theme-dark .workspace-tabs.mod-stacked .workspace-tab-header.is-active.mod-active .workspace-tab-header-inner-title {
+    color: var(--color-accent-2);
+}
