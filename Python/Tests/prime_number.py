@@ -7,8 +7,8 @@ def isprime_slow(n):
     if n <= 1: return False
     
     # this runs n-2 times
-    for _ in range(2, n):
-        if n%_ == 0: return False
+    for i in range(2, n):
+        if n%i == 0: return False
 
     return True
 
@@ -20,8 +20,8 @@ def isprime_medium(n):
 
     # this runs sqrt(n) times
     # if we divide n by any number bigger than the square root of n, it will never be a prime
-    for _ in range(2, int(n**0.5)+1):
-        if n%_ == 0: return False
+    for i in range(2, int(n**0.5)+1):
+        if n%i == 0: return False
         
     return True
 
@@ -34,8 +34,8 @@ def isprime_fast(n):
 
     # this runs 0.5*sqrt(n) times
     # since not divisible by 2, only need to check for odd numbers
-    for _ in range(3, int(n**0.5)+1, 2):
-        if n%_ == 0: return False
+    for i in range(3, int(n**0.5)+1, 2):
+        if n%i == 0: return False
 
     return True
 
