@@ -15,7 +15,7 @@ tries = -1  # if <0, infinite attempts
 pick = random.randint(min, max)
 
 
-# ===== Meaningless overcomplicating shit ======
+# ===== Meaningless overcomplicating code to practice decorators ======
 def h(function):
     def wrapper(*args, **kwargs):
         output = f'<h{args[0]}>{function()}</h{args[0]}>'
@@ -36,7 +36,7 @@ def i(function):
     return wrapper
 
 
-# ===== Intro =====
+# ===== Building the website =====
 app = Flask(__name__)
 
 
