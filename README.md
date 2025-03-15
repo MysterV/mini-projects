@@ -8,7 +8,6 @@ About 90% of it was hand-made by me, the other 10% tweaked by me.
 
 ## What you can find here
 - AutoHotKey - various AHK scripts I found on the web and tweaked to suit my needs
-- Obsidian - small, modular CSS snippets to improve tiny bits of the app's appearance
 - Python - various mini projects, tools, minigames, etc.
 - Registry - various Windows Registry scripts
 - Web Dev - my failed attempts at making websites
