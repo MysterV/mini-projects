@@ -15,7 +15,7 @@ def get_note_midi_number(key: str) -> int:
         for sharp in range(accidental.count('#')): note_number += 1  # up a semitone
     return note_number
 
-def piano_key_wave(key: int|str='A4', tuning: float=440.0, tuning_ref_key: int|str='A4', round_digits: int=3) -> dict:
+def piano_key_frequency(key: int|str='A4', tuning: float=440.0, tuning_ref_key: int|str='A4', round_digits: int=3) -> dict:
     '''
     Takes in the key in the form of either:
     \n- {1 letter note name}{however many accidentals you want}{octave number}, e.g. A#4, D##b#b11,
@@ -35,8 +35,8 @@ def piano_key_wave(key: int|str='A4', tuning: float=440.0, tuning_ref_key: int|s
     return round((tuning * 2 ** ((note_number-ref_note_number)/12)), round_digits)
 
 
-test = ['c0', 'a4', 'a#4', 'b4', 'c5', 'c#5', 'd5', 'd#5', 'e5', 'f5', 'f#5', 'g5', 'g#5', 'A5', 'a##5', 'dbbbbb5', 'Ab#b#b#b#b#5', 'A-1', 'C-10', 'C12', 'D20', 69, 1024]
-print(piano_key_wave('A4'))
-for i in test:
-    print(piano_key_wave(i, tuning=261.626, tuning_ref_key=60))
+# test = ['c0', 'a4', 'a#4', 'b4', 'c5', 'c#5', 'd5', 'd#5', 'e5', 'f5', 'f#5', 'g5', 'g#5', 'A5', 'a##5', 'dbbbbb5', 'Ab#b#b#b#b#5', 'A-1', 'C-10', 'C12', 'D20', 69, 1024]
+# print(piano_key_wave('A4'))
+# for i in test:
+#     print(piano_key_wave(i, tuning=261.626, tuning_ref_key=60))
 
