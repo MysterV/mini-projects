@@ -2,7 +2,7 @@ import re
 
 def get_note_midi_number(key: str) -> int:
     '''returns the MIDI number of the note'''
-    key_analyzed = re.match('(^[a-g]{1})([b#]*)(-*\d+)', key.lower())
+    key_analyzed = re.match('(^[a-g])([b#]*)(-*\d+)', key.lower())
     if not key_analyzed: raise Exception('Incorrect note format')
 
     note, accidental, octave = key_analyzed.groups()
@@ -33,10 +33,4 @@ def piano_key_frequency(key: int|str='A4', tuning: float=440.0, tuning_ref_key: 
     elif isinstance(tuning_ref_key, int): ref_note_number = tuning_ref_key
     
     return round((tuning * 2 ** ((note_number-ref_note_number)/12)), round_digits)
-
-
-# test = ['c0', 'a4', 'a#4', 'b4', 'c5', 'c#5', 'd5', 'd#5', 'e5', 'f5', 'f#5', 'g5', 'g#5', 'A5', 'a##5', 'dbbbbb5', 'Ab#b#b#b#b#5', 'A-1', 'C-10', 'C12', 'D20', 69, 1024]
-# print(piano_key_wave('A4'))
-# for i in test:
-#     print(piano_key_wave(i, tuning=261.626, tuning_ref_key=60))
 
