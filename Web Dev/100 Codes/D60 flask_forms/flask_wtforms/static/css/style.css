@@ -1,0 +1,9 @@
+:root {
+    background: #e600e6;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+}
+
