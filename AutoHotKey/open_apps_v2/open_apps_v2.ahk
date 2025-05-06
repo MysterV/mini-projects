@@ -92,4 +92,5 @@ FindApp(keybind, appConfigs) {
             break
         }
     }
+    return
 }
