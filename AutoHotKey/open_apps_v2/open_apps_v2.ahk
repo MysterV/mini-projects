@@ -1,13 +1,27 @@
 ; Add a universal shortcut for opening apps, refactored by Claude to simplify the process
 
 
-configFilePath := A_ScriptDir . "\open_apps_v2.ini"
+configFilePath := A_ScriptDir . "\config.ini"
 
+; =======================================================================================
 
 #SingleInstance Force
 #Persistent
 
-LoadAppConfigsFromFile(filePath) {
+appConfigs := LoadAppConfigs(configFilePath)
+
+
+#f::  ; Trigger/leader: Win + f
+    BlockInput, On
+    Input, keyPressed, L1 T1  ; Capture 1 key with a 1s timeout
+    BlockInput, Off
+    
+    FindApp(keyPressed, appConfigs)
+    
+return
+
+
+LoadAppConfigs(filePath) {
     configs := []
     IniRead, sections, %filePath%
     
@@ -38,18 +52,11 @@ LoadAppConfigsFromFile(filePath) {
     return configs
 }
 
-appConfigs := LoadAppConfigsFromFile(configFilePath)
 
-
-; Trigger/leader: Win + f
-#f::
-    BlockInput, On
-    Input, keySequence, L1 T1  ; Capture 1 key with a 1-second timeout
-    BlockInput, Off
-
+FindApp(keybind, appConfigs) {
     ; Loop through the app configurations
     for index, app in appConfigs {
-        if (keySequence = app.key) {
+        if (keybind = app.key) {
             appExe = % app.exe
             appPath = % app.path
             
@@ -85,4 +92,4 @@ appConfigs := LoadAppConfigsFromFile(configFilePath)
             break
         }
     }
-return
+}
