@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Restaurants{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <h1>All Cafes</h1>
+
+	  <table class="table table-dark table-striped table-hover">
+      <thead>
+        <tr>
+          {% for property in cafes[0] %}
+          <th scope="col">{{ property }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in cafes[1:] %}
+        <tr>
+          <!-- format dynamically other properties -->
+          {% for property in row[:] %}
+
+          <!-- links -->
+          {% if property|regex_match('^.*://.*') %}
+            <td><a href="{{ property }}">Link</a></td>
+
+          <!-- time HH:mm -->
+          {% elif property|regex_match('\d\d:\d\d:\d\d') %}
+            <td>{{ property[:5] }}</td>
+
+          <!-- ratings -->
+          {% elif property == "0" %}
+            <td>🚫</td>
+          {% elif property|int in range(1, 11) %}
+            <td>{{'⭐' * property|int}}</td>
+          {% else %}
+            <td>{{property}}</td>
+          
+          {% endif %}
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+  	  </table>
+
+      <p><a href="/add">Don't see a cafe? Add it yourself!</a></p>
+      <p><a href="/">Return to index page</a></p>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
