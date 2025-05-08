@@ -1,4 +1,4 @@
-; INI config loader, made with help of Claude
+; INI config file loader
 
 ; LoadAppConfigs(iniPath) {
 ;     global iniPath
