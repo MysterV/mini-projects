@@ -1,8 +1,13 @@
 ; INI config loader, made with help of Claude
 
-LoadINI(filePath) {
+LoadConfig(file_path, default_config_path) {
     configs := []
-    IniRead, sections, %filePath%
+
+    ; read config file
+    if !FileExist(file_path) {
+        FileCopy, %default_config_path%, %file_path%
+    }
+    IniRead, sections, %file_path%
     
     Loop, Parse, sections, `n
     {

@@ -1,17 +1,17 @@
-FindApp(keybind, appConfigs) {
+LoadApp(keybind, appConfigs) {
     ; Loop through the app configurations
     for index, app in appConfigs {
+        ; if found a match for pressed key in the configs
         if (keybind = app.key) {
             appPath := app.path
             appExe := app.exe
             appArgs := app.args
             appWorkDir := app.workDir
-            ;MsgBox %appPath% %appExe% %appArgs% %appWorkDir%
+            ; MsgBox %appPath% %appExe% %appArgs% %appWorkDir%
 
             ; set working directory
-            if (appWorkDir) {
-                SetWorkingDir, %appWorkDir%
-            }
+            ; if workDir was set to empty or unset, and path is just filename, e.g. cmd.exe, it's set to the script's directory
+            SetWorkingDir, %appWorkDir%
             
             ; if justRun=true, skip checks and start new instance
             if (app.justRun = true) {
@@ -36,7 +36,7 @@ FindApp(keybind, appConfigs) {
                     WinWait, ahk_class CabinetWClass
                     WinActivate, ahk_class CabinetWClass
                 }
-            ; other apps
+            ; other apps - focus window if running, start if not
             } else {
                 IfWinNotExist, ahk_exe %appExe%
                     Run, %appPath% %appArgs%

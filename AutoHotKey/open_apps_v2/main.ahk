@@ -1,6 +1,7 @@
 ; Add a universal shortcut for opening apps
 
-iniPath := A_ScriptDir . "\config.ini"
+config_path := A_ScriptDir . "\config.ini"
+default_config_path := "default_config.ini"
 
 ; ================================================================
 
@@ -9,7 +10,7 @@ iniPath := A_ScriptDir . "\config.ini"
 #Include %A_ScriptDir%\config_loader.ahk
 #Include %A_ScriptDir%\app_loader.ahk
 
-appConfigs := LoadINI(iniPath)  ; from config_loader.ahk
+app_configs := LoadConfig(config_path, default_config_path)  ; from config_loader.ahk
 
 ; Trigger/leader: [Win] + [F]
 #f::  
@@ -18,11 +19,11 @@ appConfigs := LoadINI(iniPath)  ; from config_loader.ahk
     KeyWait, f
 
     BlockInput, On
-    Input, keyPressed, L1 T1, {Esc}
+    Input, key_pressed, L1 T1, {Esc}
     BlockInput, Off
     
-    if (keyPressed) {
-        FindApp(keyPressed, appConfigs)  ; from app_loader.ahk
+    if (key_pressed) {
+        LoadApp(key_pressed, app_configs)  ; from app_loader.ahk
     }
 return
 
