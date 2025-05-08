@@ -1,14 +1,14 @@
-; Add a universal shortcut for opening apps, refactored by Claude to simplify the process
+; Add a universal shortcut for opening apps
 
+iniPath := A_ScriptDir . "\config.ini"
 
-configFilePath := A_ScriptDir . "\config.ini"
-
-; =======================================================================================
+; ================================================================
 
 #SingleInstance Force
 #Persistent
+#Include %A_ScriptDir%\config_loader.ahk
 
-appConfigs := LoadAppConfigs(configFilePath)
+appConfigs := LoadINI(iniPath)
 
 
 #f::  ; Trigger/leader: Win + f
@@ -19,38 +19,6 @@ appConfigs := LoadAppConfigs(configFilePath)
     FindApp(keyPressed, appConfigs)
     
 return
-
-
-LoadAppConfigs(filePath) {
-    configs := []
-    IniRead, sections, %filePath%
-    
-    Loop, Parse, sections, `n
-    {
-        section := A_LoopField
-        IniRead, key, %filePath%, %section%, key, ERROR
-        if (key = "ERROR")
-            continue
-            
-        config := {key: key}
-        IniRead, configExe, %filePath%, %section%, exe, 
-        IniRead, configPath, %filePath%, %section%, path, 
-        IniRead, configWorkDir, %filePath%, %section%, workDir, ERROR
-        IniRead, configArgs, %filePath%, %section%, args, ERROR
-        IniRead, configJustRun, %filePath%, %section%, justRun, false
-
-        config.exe := configExe
-        config.path := configPath
-        config.justRun := %configJustRun%
-        if (configWorkDir != "ERROR")
-            config.workDir := configWorkDir
-        if (configArgs != "ERROR")
-            config.args := configArgs
-        
-        configs.Push(config)
-    }
-    return configs
-}
 
 
 FindApp(keybind, appConfigs) {
