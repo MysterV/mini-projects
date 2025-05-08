@@ -6,6 +6,7 @@ Backups/
 input.txt
 output.txt
 save.txt
+config.ini
 unknown_words.csv
 *api_key.*
 token.txt
