@@ -10,8 +10,8 @@ If they do develop to a point where I feel they do deserve their own repo, I mov
 - `Batch` - batch (command prompt) scripts
 - `PowerShell` - PowerShell scripts designed to work with Task Scheduler
 - `Python` - various mini projects, tools, minigames, etc.
-- `Registry` - various Windows Registry scripts, mainly for tweaking Windows Explorer
-- `Web Dev` - my failed attempts at making websites, websites made with the Flask framework can be found in `Python` tho
+- `Registry` - various Windows Registry scripts, made for Win11, but may or may not work on older versions
+- `Web Dev` - my attempts at front-end stuff
 - `YNA` - YNA tags for a [Discord bot named "42"](https://42.rockett.space/)
 
 
