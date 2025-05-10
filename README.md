@@ -6,7 +6,6 @@ This repository is basically a catch-all for all the little scripts that were to
 If they do develop to a point where I feel they do deserve their own repo, I move them out of here.
 
 ## What you can find here
-- `AutoHotKey` - various AHK scripts I found on the web and tweaked to suit my needs
 - `Batch` - batch (command prompt) scripts
 - `PowerShell` - PowerShell scripts designed to work with Task Scheduler
 - `Python` - various mini projects, tools, minigames, etc.
