@@ -2,6 +2,7 @@
 
 config_path := A_ScriptDir . "\config.ini"
 default_config_path := "default_config.ini"
+app_icon_path = A_ScriptDir . "app.ico"
 
 ; ================================================================
 
@@ -9,6 +10,7 @@ default_config_path := "default_config.ini"
 #Persistent
 #Include %A_ScriptDir%\config_loader.ahk
 #Include %A_ScriptDir%\app_loader.ahk
+Menu, Tray, Icon, app.ico
 
 app_configs := LoadConfig(config_path, default_config_path)  ; from config_loader.ahk
 
