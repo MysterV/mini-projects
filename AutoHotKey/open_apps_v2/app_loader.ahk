@@ -7,7 +7,7 @@ LoadApp(keybind, appConfigs) {
             appExe := app.exe
             appArgs := app.args
             appWorkDir := app.workDir
-            ; MsgBox %appPath% %appExe% %appArgs% %appWorkDir%
+            Menu, Tray, Tip, open_apps_v2 - %A_ScriptName%`nexe: %appExe%`npath: %appPath%`nargs: %appArgs%`nwork dir: %appWorkDir%
 
             ; set working directory
             ; if workDir was set to empty or unset, and path is just filename, e.g. cmd.exe, it's set to the script's directory
