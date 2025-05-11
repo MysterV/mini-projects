@@ -1,10 +1,16 @@
 import datetime as dt
 import os
 
+# ===== Config =====
+output_path = 'output.txt'
 template = '[Happy %Y %B DAY @ Sweden, HOURSh MINUTESm late]'
-last_date = dt.date.fromisoformat(input('Last message on (YYYY-MM-DD): '))
+last_date = input('Last message on (YYYY-MM-DD): ')
+timezone_offset = 2  # e.g. for UTC+2 => 2, UTC-7 => -7
+
+
+# ===== Code =====
+last_date_dt = dt.date.fromisoformat(last_date)
 today = dt.datetime.now(dt.UTC)
-file_path = 'output.txt'
 messages = []
 
 def day_with_suffix(day):
@@ -16,10 +22,11 @@ def day_with_suffix(day):
         elif str(day)[-1] == '3': return f'{day}rd'
     else: return f'{day}th'
 
-with open(file_path, 'w') as file:
-    for i in range(1, (today.date() - last_date).days + 1):
-        message_day = last_date + dt.timedelta(days=i)
+with open(output_path, 'w') as file:
+    for i in range(1, (today.date() - last_date_dt).days + 1):
+        message_day = last_date_dt + dt.timedelta(days=i)
         days_behind = (today.date() - message_day).days
+        current_hour = today.hour+timezone_offset
         print(days_behind)
         
         # month full name
@@ -34,8 +41,8 @@ with open(file_path, 'w') as file:
         #else: message = message.replace('DAYSd ', '')
         
         # without days use template 'HOURSh MINUTESm late'
-        if days_behind > 0: message = message.replace('HOURS', str(days_behind*24+today.hour))
-        elif today.hour > 0: message = message.replace('HOURS', str(today.hour))
+        if days_behind > 0: message = message.replace('HOURS', str(days_behind*24+current_hour))
+        elif today.hour > 0: message = message.replace('HOURS', str(current_hour))
         else: message = message.replace('HOURSh ', '')
         
         if today.minute > 0: message = message.replace('MINUTES', str(today.minute))
@@ -43,5 +50,5 @@ with open(file_path, 'w') as file:
         
         messages.append(message)
     file.write('\n'.join(messages))
-    os.startfile(file_path)
+    os.startfile(output_path)
 
