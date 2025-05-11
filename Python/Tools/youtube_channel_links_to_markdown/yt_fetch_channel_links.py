@@ -12,8 +12,7 @@ import os
 # template supports {name}, {handle}, {id}, {url_id}, {url_handle}
 TEMPLATE = '[{name}]({url_id}) - [{handle}]({url_handle})'
 OUTPUT_FILE_PATH = 'output.txt'
-CHANNEL_URL = input('URL: ')
-
+CHANNEL_URLS = [input('URL: ')]
 
 
 # ===== CODE =====
@@ -22,45 +21,63 @@ options = Options()
 options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 options.add_argument("--window-size=1920x1080")
-driver = webdriver.Chrome(options=options)
 
 
-# Cookies consent page
-driver.get(CHANNEL_URL)
-time.sleep(1)
-try:
-    reject_button = driver.find_element(By.CSS_SELECTOR, 'button[aria-label="Reject all"]')
-    reject_button.click()
-    print("Clicked reject cookies button.")
+def fetch_channel_data(url, driver) -> dict:
+    driver.get(url)
     time.sleep(1)
-except:
-    print("Reject cookies button not found or already rejected.")
+    # Cookies consent page
+    try:
+        reject_button = driver.find_element(By.CSS_SELECTOR, 'button[aria-label="Reject all"]')
+        reject_button.click()
+        print("Clicked reject cookies button.")
+        time.sleep(1)
+    except:
+        print("Reject cookies button not found or already rejected.")
 
 
-# Full page - the real deal
-print('YouTube loaded. Extracting channel ID and @handle...')
-html = driver.page_source
+    # Full page - the real deal
+    print('YouTube loaded. Extracting channel name, ID, @handle and URLs...')
+    html = driver.page_source
 
-# Close the browser
-driver.quit()
+    name = re.search(r'<meta itemprop="name" content="([^"]+)', html).group(1)
+    url_id = re.search(r'"channelUrl"\s*:\s*"(https://www.youtube.com/channel/[\w-]+)"', html).group(1)
+    url_handle = re.search(r'"vanityChannelUrl"\s*:\s*"(http://www.youtube.com/@[^"]+)', html).group(1).replace('http://', 'https://')
+    channel_id = url_id.split('channel/')[1]
+    handle = url_handle.split('.com/')[1]
+    return {
+        'name': name,
+        'handle': handle,
+        'channel_id': channel_id,
+        'url_id': url_id,
+        'url_handle': url_handle
+    }
 
-# Read all the data
-url_id = re.search(r'"channelUrl"\s*:\s*"(https://www.youtube.com/channel/[\w-]+)"', html).group(1)
-url_handle = re.search(r'"vanityChannelUrl"\s*:\s*"(http://www.youtube.com/@[^"]+)', html).group(1)
-channel_id = url_id.split('channel/')[1]
-handle = url_handle.split('.com/')[1]
-name = re.search(r'<meta itemprop="name" content="([^"]+)', html).group(1)
 
-# Fill in the template
-formatted = TEMPLATE.format(
-    name=name,
-    handle=handle,
-    id=channel_id,
-    url_id=url_id,
-    url_handle=url_handle)
+def format_data(template: str, data: dict) -> str:
+    return template.format(
+            name=data['name'],
+            handle=data['handle'],
+            id=data['channel_id'],
+            url_id=data['url_id'],
+            url_handle=data['url_handle'])
 
-# Output result
-with open(OUTPUT_FILE_PATH, 'wt') as file:
-    file.write(formatted)
+
+def md_format(urls: list):
+    driver = webdriver.Chrome(options=options)
+    with open(OUTPUT_FILE_PATH, 'wt') as file:
+        for url in urls:
+            data = fetch_channel_data(url, driver)
+            formatted = format_data(TEMPLATE, data)
+            file.write(formatted + '\n')
+    driver.quit()
+
+
+# Fill in the template and output
+if CHANNEL_URLS:
+    md_format(CHANNEL_URLS)
     os.startfile(OUTPUT_FILE_PATH)
+else:
+    print('No URL provided.')
+
 print('Done!')
