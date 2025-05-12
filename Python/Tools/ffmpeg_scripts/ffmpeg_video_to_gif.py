@@ -36,7 +36,7 @@ parser.add_argument('-width', '-w', default=640, metavar='pixels', help='GIF wid
 parser.add_argument('-start', '-s', default=0, metavar='HH:mm:ss | mm:ss | SECONDS', help='Starting point in the video, e.g. 00:05:30, 05:30 or 330 (default: 0)')
 parser.add_argument('-duration', '-t', metavar='HH:mm:ss | mm:ss | SECONDS', help='Duration of the GIF, e.g. 00:00:10, 00:10 or 10 (default: from -start to the end of the video)')
 parser.add_argument('-pause', type=int, default=0, metavar='0|1', help='Keep the window open after finishing (for debugging) (default: 0)')
-parser.add_argument('-dithering', type=int, default=0, metavar='0|1', help='Use dithering. Reduces filesize, but makes GIF grainy (default: 0)')
+parser.add_argument('-dithering', type=int, default=0, metavar='0|1', help='Use dithering. Reduces filesize and improves performance, but makes GIF grainy (default: 0)')
 
 args = parser.parse_args()
 
