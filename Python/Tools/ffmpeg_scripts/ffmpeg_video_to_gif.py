@@ -36,6 +36,7 @@ parser.add_argument('-width', '-w', default=640, metavar='pixels', help='GIF wid
 parser.add_argument('-start', '-s', default=0, metavar='HH:mm:ss | mm:ss | SECONDS', help='Starting point in the video, e.g. 00:05:30, 05:30 or 330 (default: 0)')
 parser.add_argument('-duration', '-t', metavar='HH:mm:ss | mm:ss | SECONDS', help='Duration of the GIF, e.g. 00:00:10, 00:10 or 10 (default: from -start to the end of the video)')
 parser.add_argument('-pause', type=int, default=0, metavar='0|1', help='Keep the window open after finishing (for debugging) (default: 0)')
+parser.add_argument('-dithering', type=int, default=0, metavar='0|1', help='Use dithering. Reduces filesize, but makes GIF grainy (default: 0)')
 
 args = parser.parse_args()
 
@@ -55,14 +56,15 @@ print(f' - Loop: {args.loop}')
 print(f' - Width: {args.width}')
 print(f' - Starting time: {args.start} seconds')
 print(f' - Duration: {args.duration} seconds')
+print(f' - Dithering: {bool(args.dithering)}')
 
 
 
 # FFmpeg command (single string)
-ffmpeg_command = (
-    # f'ffmpeg -ss {args.start} -t {args.duration} -i "{args.input_filepath}" -vf "fps={args.fps},scale={args.width}:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop {args.loop} "{output_filepath}"'
-    f'ffmpeg -ss {args.start} -t {args.duration} -i "{args.input_filepath}" -vf "fps={args.fps},scale={args.width}:-1:flags=lanczos,split[s0][s1];[s0]palettegen=stats_mode=diff[p];[s1][p]paletteuse=dither=none" -loop {args.loop} "{output_filepath}"'
-)
+if args.dithering:
+    ffmpeg_command = f'ffmpeg -ss {args.start} -t {args.duration} -i "{args.input_filepath}" -vf "fps={args.fps},scale={args.width}:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop {args.loop} "{output_filepath}"'
+else:
+    ffmpeg_command = f'ffmpeg -ss {args.start} -t {args.duration} -i "{args.input_filepath}" -vf "fps={args.fps},scale={args.width}:-1:flags=lanczos,split[s0][s1];[s0]palettegen=stats_mode=diff[p];[s1][p]paletteuse=dither=none" -loop {args.loop} "{output_filepath}"'
 
 try:
     subprocess.run(ffmpeg_command, shell=True, check=True)
