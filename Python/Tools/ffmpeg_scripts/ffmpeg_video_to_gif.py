@@ -29,6 +29,7 @@ def get_video_duration(filepath):
         sys.exit(1)
 
 
+parser.add_argument('-?', default=15, metavar='FPS', help='GIF framerate, e.g. 15 (default 30)')
 parser.add_argument('-input_filepath', '-i', nargs='+', metavar='PATH', help=r'Path to the input video file, e.g. C:\Memes\2000cheeses.mp4, or multiple paths separated by a whitespace.')
 # parser.add_argument('input_filepath', default='', metavar='PATH', help=r'Path to the input video file, e.g. C:\Memes\2000cheeses.mp4')
 parser.add_argument('-fps', default=15, metavar='FPS', help='GIF framerate, e.g. 15 (default 30)')
