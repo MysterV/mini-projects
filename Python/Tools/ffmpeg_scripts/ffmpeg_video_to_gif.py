@@ -30,11 +30,11 @@ def get_video_duration(filepath):
 
 
 parser.add_argument('-input_filepath', '-i', metavar='PATH', help=r'Path to the input video file, e.g. C:\Memes\2000cheeses.mp4')
-parser.add_argument('-fps', default=15, metavar='INT', help='GIF framerate, e.g. 15 (default 30)')
-parser.add_argument('-loop', '-l', default=0, metavar='INT', help='Loop (replay) count, e.g. 2 (to play 3x) (default: 0):\n\t0 => infinite,\n\t-1 => play once')
+parser.add_argument('-fps', default=15, metavar='FPS', help='GIF framerate, e.g. 15 (default 30)')
+parser.add_argument('-loop', '-l', default=0, metavar='COUNT', help='Loop (replay) count, e.g. 2 (to play 3x) (default: 0):\n\t0 => infinite,\n\t-1 => play once')
 parser.add_argument('-width', '-w', default=640, metavar='PX', help='GIF width in pixels, e.g. 720 (default: 640)\n\t-1 => original size')
-parser.add_argument('-start', '-s', default=0, metavar='HH:mm:ss | mm:ss | SECONDS', help='Starting point in the video, e.g. 00:05:30, 05:30 or 330 (default: 0)')
-parser.add_argument('-duration', '-t', metavar='HH:mm:ss | mm:ss | SECONDS', help='Duration of the GIF, e.g. 00:00:10, 00:10 or 10 (default: from -start to the end of the video)')
+parser.add_argument('-start', '-s', default=0, metavar='TIMESTAMP | SECONDS', help='Starting point in the video, e.g. 00:05:30, 05:30 or 330 (default: 0)')
+parser.add_argument('-duration', '-t', metavar='TIMESTAMP | SECONDS', help='Duration of the GIF, e.g. 00:00:10, 00:10 or 10 (default: from -start to the end of the video)')
 parser.add_argument('-pause', type=int, default=0, metavar='0|1', help='Keep the window open after finishing (for debugging) (default: 0)')
 parser.add_argument('-dithering', '-d', type=int, default=0, metavar='0|1', help='Use dithering. Reduces filesize and improves performance, but makes GIF grainy (default: 0)')
 
