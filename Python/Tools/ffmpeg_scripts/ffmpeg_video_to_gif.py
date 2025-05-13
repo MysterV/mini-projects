@@ -4,12 +4,15 @@ import argparse
 import os
 
 parser = argparse.ArgumentParser(
+    formatter_class=argparse.RawTextHelpFormatter,
+    add_help=False,
     description="Convert video to GIF using FFmpeg",
     epilog=f'''Example usage:
-- default:\t\tffmpeg_video_to_gif.py video.mkv
-- custom width:\t\tffmpeg_video_to_gif.py video.mkv -width 360
-- part of a video:\tffmpeg_video_to_gif.py video.mkv -start 00:05:43 -duration 30''',
-    formatter_class=argparse.RawTextHelpFormatter
+- default:\t\t%(prog)s -i video.mkv
+- custom width:\t\t%(prog)s -i video.mkv -width 360
+- part of a video:\t%(prog)s -i video.mkv -start 00:05:43 -duration 30
+- multiple videos:\t%(prog)s -i video.mkv video2.mp4 -fps 60''',
+    usage='%(prog)s [OPTIONS] -i PATH [PATH...]'
 )
 
 # Get video duration using ffprobe
@@ -29,7 +32,7 @@ def get_video_duration(filepath):
         sys.exit(1)
 
 
-parser.add_argument('-?', default=15, metavar='FPS', help='GIF framerate, e.g. 15 (default 30)')
+parser.add_argument('-?', '-h', '-help', '--help', action='help', help='show help message')
 parser.add_argument('-input_filepath', '-i', nargs='+', metavar='PATH', help=r'Path to the input video file, e.g. C:\Memes\2000cheeses.mp4, or multiple paths separated by a whitespace.')
 # parser.add_argument('input_filepath', default='', metavar='PATH', help=r'Path to the input video file, e.g. C:\Memes\2000cheeses.mp4')
 parser.add_argument('-fps', default=15, metavar='FPS', help='GIF framerate, e.g. 15 (default 30)')
@@ -54,13 +57,13 @@ for file in args.input_filepath:
         args.duration = get_video_duration(file) - float(args.start)
 
 
-    print(f'Converting {file} to a GIF with:')
-    print(f' - Framerate: {args.fps}')
-    print(f' - Loop: {args.loop}')
-    print(f' - Width: {args.width}')
-    print(f' - Starting time: {args.start} seconds')
-    print(f' - Duration: {args.duration} seconds')
-    print(f' - Dithering: {bool(args.dithering)}')
+    print(f'''Converting {file} to a GIF with:
+ - Framerate: {args.fps}
+ - Loop: {args.loop}
+ - Width: {args.width}
+ - Starting time: {args.start} seconds
+ - Duration: {args.duration} seconds
+ - Dithering: {bool(args.dithering)}''')
 
 
 
