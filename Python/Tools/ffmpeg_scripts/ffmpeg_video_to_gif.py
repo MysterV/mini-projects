@@ -29,7 +29,8 @@ def get_video_duration(filepath):
         sys.exit(1)
 
 
-parser.add_argument('-input_filepath', '-i', metavar='PATH', help=r'Path to the input video file, e.g. C:\Memes\2000cheeses.mp4')
+parser.add_argument('-input_filepath', '-i', nargs='+', metavar='PATH', help=r'Path to the input video file, e.g. C:\Memes\2000cheeses.mp4, or multiple paths separated by a whitespace.')
+# parser.add_argument('input_filepath', default='', metavar='PATH', help=r'Path to the input video file, e.g. C:\Memes\2000cheeses.mp4')
 parser.add_argument('-fps', default=15, metavar='FPS', help='GIF framerate, e.g. 15 (default 30)')
 parser.add_argument('-loop', '-l', default=0, metavar='COUNT', help='Loop (replay) count, e.g. 2 (to play 3x) (default: 0):\n\t0 => infinite,\n\t-1 => play once')
 parser.add_argument('-width', '-w', default=640, metavar='PX', help='GIF width in pixels, e.g. 720 (default: 640)\n\t-1 => original size')
@@ -45,32 +46,34 @@ if not args.input_filepath:
     input('\nPress Enter to exit...')
     exit()
 
-output_filepath = args.input_filepath.rsplit('.', 1)[0] + '.gif'
-if not args.duration:
-    args.duration = get_video_duration(args.input_filepath) - float(args.start)
+for file in args.input_filepath:
+
+    output_filepath = file.rsplit('.', 1)[0] + '.gif'
+    if not args.duration:
+        args.duration = get_video_duration(file) - float(args.start)
 
 
-print(f'Converting {args.input_filepath} to a GIF with:')
-print(f' - Framerate: {args.fps}')
-print(f' - Loop: {args.loop}')
-print(f' - Width: {args.width}')
-print(f' - Starting time: {args.start} seconds')
-print(f' - Duration: {args.duration} seconds')
-print(f' - Dithering: {bool(args.dithering)}')
+    print(f'Converting {file} to a GIF with:')
+    print(f' - Framerate: {args.fps}')
+    print(f' - Loop: {args.loop}')
+    print(f' - Width: {args.width}')
+    print(f' - Starting time: {args.start} seconds')
+    print(f' - Duration: {args.duration} seconds')
+    print(f' - Dithering: {bool(args.dithering)}')
 
 
 
-# FFmpeg command (single string)
-if args.dithering:
-    ffmpeg_command = f'ffmpeg -ss {args.start} -t {args.duration} -i "{args.input_filepath}" -vf "fps={args.fps},scale={args.width}:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop {args.loop} "{output_filepath}"'
-else:
-    ffmpeg_command = f'ffmpeg -ss {args.start} -t {args.duration} -i "{args.input_filepath}" -vf "fps={args.fps},scale={args.width}:-1:flags=lanczos,split[s0][s1];[s0]palettegen=stats_mode=diff[p];[s1][p]paletteuse=dither=none" -loop {args.loop} "{output_filepath}"'
+    # FFmpeg command (single string)
+    if args.dithering:
+        ffmpeg_command = f'ffmpeg -ss {args.start} -t {args.duration} -i "{file}" -vf "fps={args.fps},scale={args.width}:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop {args.loop} "{output_filepath}"'
+    else:
+        ffmpeg_command = f'ffmpeg -ss {args.start} -t {args.duration} -i "{file}" -vf "fps={args.fps},scale={args.width}:-1:flags=lanczos,split[s0][s1];[s0]palettegen=stats_mode=diff[p];[s1][p]paletteuse=dither=none" -loop {args.loop} "{output_filepath}"'
 
-try:
-    subprocess.run(ffmpeg_command, shell=True, check=True)
-    print(f'\nConversion complete: {output_filepath}')
-except subprocess.CalledProcessError:
-    print('\nError: Conversion failed.')
+    try:
+        subprocess.run(ffmpeg_command, shell=True, check=True)
+        print(f'\nConversion complete: {output_filepath}')
+    except subprocess.CalledProcessError:
+        print('\nError: Conversion failed.')
 
-if args.pause:
-    os.system("pause")
+    if args.pause:
+        os.system("pause")
