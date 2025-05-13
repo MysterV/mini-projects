@@ -79,5 +79,5 @@ for file in args.input_filepath:
     except subprocess.CalledProcessError:
         print('\nError: Conversion failed.')
 
-    if args.pause:
-        os.system("pause")
+if args.pause:
+    os.system("pause")
