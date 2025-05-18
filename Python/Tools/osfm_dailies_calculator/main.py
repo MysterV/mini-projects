@@ -42,7 +42,7 @@ with open(output_path, 'w') as file:
         
         # without days use template 'HOURSh MINUTESm late'
         if days_behind > 0: message = message.replace('HOURS', str(days_behind*24+current_hour))
-        elif today.hour > 0: message = message.replace('HOURS', str(current_hour))
+        elif current_hour > 0: message = message.replace('HOURS', str(current_hour))
         else: message = message.replace('HOURSh ', '')
         
         if today.minute > 0: message = message.replace('MINUTES', str(today.minute))
