@@ -30,3 +30,20 @@ def to_uri(path: str, protocol: str='file://', address: str='/'):
         return protocol + address + drive_letter + '/' + path
     else:
         return protocol + address + path
+
+
+# Usage example
+if __name__ == '__main__':
+    import path_to_uri as ptu
+
+    addresses = {
+        'file://': '/',
+        'http://': 'localhost:8080/'
+    }
+
+    while True:
+        path = input('Path to encode (leave empty to exit):\n')
+        if not path:
+            break
+        for protocol, address in addresses.items():
+            print(ptu.to_uri(path=path, protocol=protocol, address=address))
