@@ -10,7 +10,7 @@ def to_raw(link: str) -> str:
 
 
 if __name__ == '__main__':
-    # import pyperclip
+    import pyperclip
     while True:
         link = input('GitHub file link (empty to exit):\n')
         if not link: break
@@ -18,7 +18,7 @@ if __name__ == '__main__':
         output = to_raw(link)
         if output:
             print(output)
-            # pyperclip.copy(output)
+            pyperclip.copy(output)
             print('Copied to clipboard!\n')
         else:
             print('Incorrect link format')
