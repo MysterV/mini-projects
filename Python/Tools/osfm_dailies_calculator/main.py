@@ -22,7 +22,8 @@ def day_with_suffix(day):
         elif str(day)[-1] == '3': return f'{day}rd'
     else: return f'{day}th'
 
-with open(output_path, 'w') as file:
+
+if __name__ == '__main__':
     for i in range(1, (today.date() - last_date_dt).days + 1):
         message_day = last_date_dt + dt.timedelta(days=i)
         days_behind = (today.date() - message_day).days
@@ -49,6 +50,7 @@ with open(output_path, 'w') as file:
         else: message = message.replace('MINUTESm ', '')
         
         messages.append(message)
-    file.write('\n'.join(messages))
-    os.startfile(output_path)
+    with open(output_path, 'w') as file:
+        file.write('\n'.join(messages))
+        os.startfile(output_path)
 
