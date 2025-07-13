@@ -2,15 +2,17 @@ import datetime as dt
 import os
 
 # ===== Config =====
-output_path = 'output.txt'
-template = '[Happy %Y %B DAY @ Sweden, HOURSh MINUTESm late]'
-last_date = input('Last message on (YYYY-MM-DD): ')
-timezone_offset = 2  # e.g. for UTC+2 => 2, UTC-7 => -7
+OUTPUT_PATH = 'output.txt'
+# TEMPLATE = '[Happy %Y %B DAY @ Sweden, HOURSh MINUTESm late]'
+TEMPLATE = 'Happy %Y %B DAY @ Sweden, HOURSh MINUTESm late'
+LAST_DATE = input('Last message on (YYYY-MM-DD): ')
+TIMEZONE_OFFSET = 2  # e.g. for UTC+2 => 2, UTC-7 => -7
 
 
 # ===== Code =====
-last_date_dt = dt.date.fromisoformat(last_date)
-today = dt.datetime.now(dt.UTC)
+last_date_dt = dt.date.fromisoformat(LAST_DATE)
+today = dt.datetime.now(dt.UTC) + dt.timedelta(hours=TIMEZONE_OFFSET)
+# today = dt.datetime.fromisoformat("2025-07-08T00:40:00")
 messages = []
 
 def day_with_suffix(day):
@@ -27,11 +29,10 @@ if __name__ == '__main__':
     for i in range(1, (today.date() - last_date_dt).days + 1):
         message_day = last_date_dt + dt.timedelta(days=i)
         days_behind = (today.date() - message_day).days
-        current_hour = today.hour+timezone_offset
         print(days_behind)
         
         # month full name
-        message = message_day.strftime(template)
+        message = message_day.strftime(TEMPLATE)
         
         # message's day without zerofill
         message = message.replace('DAY', day_with_suffix(message_day.day), 1)
@@ -42,15 +43,15 @@ if __name__ == '__main__':
         #else: message = message.replace('DAYSd ', '')
         
         # without days use template 'HOURSh MINUTESm late'
-        if days_behind > 0: message = message.replace('HOURS', str(days_behind*24+current_hour))
-        elif current_hour > 0: message = message.replace('HOURS', str(current_hour))
+        if days_behind > 0: message = message.replace('HOURS', str(days_behind*24+today.hour))
+        elif today.hour > 0: message = message.replace('HOURS', str(today.hour))
         else: message = message.replace('HOURSh ', '')
         
         if today.minute > 0: message = message.replace('MINUTES', str(today.minute))
         else: message = message.replace('MINUTESm ', '')
         
         messages.append(message)
-    with open(output_path, 'w') as file:
+    with open(OUTPUT_PATH, 'w') as file:
         file.write('\n'.join(messages))
-        os.startfile(output_path)
+        os.startfile(OUTPUT_PATH)
 
