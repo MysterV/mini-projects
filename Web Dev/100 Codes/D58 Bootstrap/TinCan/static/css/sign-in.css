@@ -1,0 +1,41 @@
+@import url("style.css");
+
+html,
+body {
+  height: 100%;
+}
+
+.form-signin, .form-signup {
+  max-width: 330px;
+  padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input, .form-signup input {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-radius: 0;
+}
+
+.form-signin input[type="email"], .form-signup input[type="email"] {
+  border-top-left-radius: var(--bs-border-radius);
+  border-top-right-radius: var(--bs-border-radius);
+}
+
+.form-signin input[type="password"] {
+  border-bottom-left-radius: var(--bs-border-radius);
+  border-bottom-right-radius: var(--bs-border-radius);
+}
+
+.form-signup input[type="passwordRepeat"] {
+  border-bottom-left-radius: var(--bs-border-radius);
+  border-bottom-right-radius: var(--bs-border-radius);
+}
+
+.navbar {
+  background: transparent !important;
+}
