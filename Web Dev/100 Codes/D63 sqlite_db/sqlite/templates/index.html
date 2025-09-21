@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Library</title>
+  </head>
+  <body>
+    <h1>My Library</h1>
+    {% if rows %}
+    <ul>
+      {% for i in rows %}
+        <li>{{i[1]}} by {{i[2]}} — {{i[3]}} <a href="{{url_for('edit', id=i[0])}}">✏️</a></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>Library is empty.</p>
+    {% endif %}
+
+    <a href="{{ url_for('add') }}">Add New Book</a>
+  </body>
+</html>
