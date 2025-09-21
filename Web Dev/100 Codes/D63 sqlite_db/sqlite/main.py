@@ -46,7 +46,7 @@ def add():
 def edit():
     id = int(request.args.get('id'))
     if request.method == 'POST':
-        cursor.execute('UPDATE books SET title=?, author=?, rating=? where id=?', (request.form['title'], request.form['author'], request.form['rating']), id)
+        cursor.execute('UPDATE books SET title=?, author=?, rating=? where id=?', (request.form['title'], request.form['author'], request.form['rating'], id))
         db.commit()
         return redirect(url_for('root'))
     if id:
