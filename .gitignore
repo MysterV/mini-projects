@@ -1,11 +1,17 @@
+# useless
 .idea/
 .venv/
 .vscode/
 __pycache__/
+
+# secrets
+*api_key.*
+
+# dynamic data
 Backups/
 input.txt
 output.txt
 save.txt
 unknown_words.csv
-*api_key.*
 token.txt
+data.db
