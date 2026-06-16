@@ -1,5 +1,6 @@
 # script to be called from the terminal, check the help function for details
 # requires ffmpeg and ffprobe to be added to PATH
+# tends to break if the file has chapters
 
 import subprocess
 import argparse
@@ -76,30 +77,30 @@ def parse_paths(paths_arg):
 
 def process_file(file):
     # process the path
-        filename, ext = file.rsplit('.', 1)
-        output_filepath = filename + "-trim." + ext
+    filename, ext = file.rsplit('.', 1)
+    output_filepath = filename + "-trim." + ext
 
-        print(f'====================\nTrimming {file} from {args.start if args.start else 'the start'} to {args.end if args.end else 'the end'}\n\n\n')
-
-
-        # Build FFmpeg command
-        start = f' -ss {args.start}' if args.start else ''
-        end = f' -to {args.end}' if args.end else ''
-
-        ffmpeg_command = f'ffmpeg -i "{filename}.{ext}"{start}{end} -map 0 -c copy -map_metadata 0 "{output_filepath}" '
+    print(f'====================\nTrimming {file} from {args.start if args.start else 'the start'} to {args.end if args.end else 'the end'}\n\n\n')
 
 
-        if args.overwrite:
-            ffmpeg_command = ffmpeg_command.replace('ffmpeg', 'ffmpeg -y')
-        if not args.v:
-            ffmpeg_command = ffmpeg_command.replace('ffmpeg', 'ffmpeg -hide_banner')
+    # Build FFmpeg command
+    start = f' -ss {args.start}' if args.start else ''
+    end = f' -to {args.end}' if args.end else ''
 
-        try:
-            print(f'Running {ffmpeg_command}')
-            subprocess.run(ffmpeg_command, shell=True, check=True)
-            print(f'\nTrimming complete: {output_filepath}\n')
-        except subprocess.CalledProcessError:
-            print('\nError: Trimming failed.\n')
+    ffmpeg_command = f'ffmpeg -i "{filename}.{ext}"{start}{end} -map 0 -c copy -map_metadata 0 "{output_filepath}" '
+
+
+    if args.overwrite:
+        ffmpeg_command = ffmpeg_command.replace('ffmpeg', 'ffmpeg -y')
+    if not args.v:
+        ffmpeg_command = ffmpeg_command.replace('ffmpeg', 'ffmpeg -hide_banner')
+
+    try:
+        print(f'Running {ffmpeg_command}')
+        subprocess.run(ffmpeg_command, shell=True, check=True)
+        print(f'\nTrimming complete: {output_filepath}\n')
+    except subprocess.CalledProcessError:
+        print('\nError: Trimming failed.\n')
 
 
 # ===== RUN =====
