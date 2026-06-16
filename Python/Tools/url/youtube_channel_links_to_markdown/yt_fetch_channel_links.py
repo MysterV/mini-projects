@@ -12,7 +12,6 @@ import os
 # template supports {name}, {handle}, {id}, {url_id}, {url_handle}
 TEMPLATE = '[{name}]({url_id}) - [{handle}]({url_handle})'
 OUTPUT_FILE_PATH = 'output.txt'
-CHANNEL_URLS = [input('URL: ')]
 
 
 # ===== CODE =====
@@ -24,6 +23,7 @@ options.add_argument("--window-size=1920x1080")
 
 
 def fetch_channel_data(url, driver) -> dict:
+    print(f"Going to {url}")
     driver.get(url)
     time.sleep(1)
     # Cookies consent page
@@ -68,16 +68,24 @@ def md_format(urls: list):
     with open(OUTPUT_FILE_PATH, 'wt') as file:
         for url in urls:
             data = fetch_channel_data(url, driver)
+            print('Extracted the data. Formatting...')
             formatted = format_data(TEMPLATE, data)
+            print(f'Markdown formatted.\n\nFormatted channel link:\n{formatted}\n\nSaving to a text file for convenience...')
             file.write(formatted + '\n')
     driver.quit()
 
 
 # Fill in the template and output
-if CHANNEL_URLS:
-    md_format(CHANNEL_URLS)
-    os.startfile(OUTPUT_FILE_PATH)
-else:
-    print('No URL provided.')
-
-print('Done!')
+if __name__ == '__main__':
+    channel_urls = [input('URL: ')]
+    if channel_urls:
+        try:
+            md_format(channel_urls)
+            os.startfile(OUTPUT_FILE_PATH)
+        except UnicodeEncodeError:
+            print('The channel name contains special characters, writing to file failed. Nag the dev to fix this issue.')
+        finally:
+            print('Done!')
+    else:
+        print('No URL provided.')
+    os.system('pause')
