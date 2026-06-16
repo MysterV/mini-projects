@@ -1,3 +1,5 @@
+# requires ffmpeg and ffprobe to be added to PATH
+
 import subprocess
 import sys
 import argparse
@@ -26,7 +28,7 @@ parser.add_argument('-v', action='store_true', help='Show full logs (default: Fa
 
 # ===== ENSURE 100% COMPATIBILITY =====
 
-# Get sample format using ffprobe (e.g. pcm16, float32)
+# Automatically get file's sample format using ffprobe (e.g. pcm16, float32)
 def get_sample_fmt(filepath):
     try:
         ffmpeg_command = f'ffprobe -v error -select_streams a:0 -show_entries stream=sample_fmt -of default=noprint_wrappers=1:nokey=1 "{filepath}"'
